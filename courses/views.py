@@ -3,9 +3,9 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, ListAPIView, CreateAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
-from courses.models import Lection, Course
+from courses.models import Lection, Course, Hometask
 from courses.permissions import IsOwnerOrReadOnly, Isteacher
-from courses.serializers import LectionSerializer, CourseSerializer
+from courses.serializers import LectionSerializer, CourseSerializer, HometaskSerializer
 
 
 class LectionAPIList(ListAPIView):
@@ -18,13 +18,12 @@ class LectionAPICreateList(CreateAPIView):
     queryset = Lection.objects.all()
     serializer_class = LectionSerializer
     permission_classes = (IsAuthenticated, Isteacher)
-    authentication_classes = (TokenAuthentication,)
 
 
 class LectionAPIDelete(RetrieveDestroyAPIView):
     queryset = Lection.objects.all()
     serializer_class = LectionSerializer
-    permission_classes = (IsOwnerOrReadOnly,Isteacher)
+    permission_classes = (IsOwnerOrReadOnly, Isteacher)
 
 
 class LectionAPIUpdate(viewsets.ModelViewSet):
@@ -45,6 +44,25 @@ class CourseAPICreateList(ListCreateAPIView):
     permission_classes = (IsAuthenticated, Isteacher)
 
 
+class HometaskAPIList(ListAPIView):
+    queryset = Hometask.objects.all()
+    serializer_class = HometaskSerializer
+    permission_classes = (IsAuthenticated,)
 
 
+class HometaskAPICreateList(CreateAPIView):
+    queryset = Hometask.objects.all()
+    serializer_class = HometaskSerializer
+    permission_classes = (IsAuthenticated, Isteacher)
 
+
+class HometaskAPIDelete(RetrieveDestroyAPIView):
+    queryset = Hometask.objects.all()
+    serializer_class = HometaskSerializer
+    permission_classes = (IsOwnerOrReadOnly, Isteacher)
+
+
+class HometaskAPIUpdate(viewsets.ModelViewSet):
+    queryset = Hometask.objects.all()
+    serializer_class = LectionSerializer
+    permission_classes = (IsOwnerOrReadOnly, Isteacher)

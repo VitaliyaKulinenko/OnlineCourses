@@ -2,10 +2,12 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 
-from .models import Lection, Course
+from .models import Lection, Course, Hometask
 
 admin.site.register(Lection)
 admin.site.register(Course)
+admin.site.register(Hometask)
+
 
 
 # ????????

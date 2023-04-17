@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from courses.models import Lection, Course
+from courses.models import Lection, Course, Hometask
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -17,3 +17,11 @@ class LectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lection
         fields = ('title', 'file', 'category', 'user')
+
+
+class HometaskSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = Hometask
+        fields = '__all__'
